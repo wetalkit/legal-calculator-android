@@ -41,9 +41,6 @@ public class ExpandableLayout extends FrameLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mOriginalHeight = Math.max(getMeasuredHeight(), mOriginalHeight);
-        if (mOriginalHeight > 0) {
-            getLayoutParams().height = mIsExpanded ? mOriginalHeight : 0;
-        }
     }
 
     @Override
@@ -66,8 +63,6 @@ public class ExpandableLayout extends FrameLayout {
                     ViewGroup.LayoutParams layoutParams = getLayoutParams();
                     layoutParams.height = val;
                     setLayoutParams(layoutParams);
-                    requestLayout();
-                    forceLayout();
                 }
             });
             anim.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -83,7 +78,6 @@ public class ExpandableLayout extends FrameLayout {
                     ViewGroup.LayoutParams layoutParams = getLayoutParams();
                     layoutParams.height = val;
                     setLayoutParams(layoutParams);
-                    postInvalidate();
                 }
             });
             anim.setInterpolator(new AccelerateDecelerateInterpolator());

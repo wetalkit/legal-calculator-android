@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="45dp"
+                android:height="45dp" />
+            <solid android:color="#FFF" />
+            <padding android:top="5dp" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/ic_action_down" />
+</layer-list>

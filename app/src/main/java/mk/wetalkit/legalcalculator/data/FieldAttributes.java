@@ -9,7 +9,8 @@ import java.util.List;
 
 public class FieldAttributes implements Serializable {
     private String placeholder;
-    private List<Option> options;
+//    @JsonAdapter(FieldOptionsTypeAdapter.class)
+    private FieldOptions options;
 
     public String getPlaceholder() {
         return placeholder;
@@ -18,4 +19,6 @@ public class FieldAttributes implements Serializable {
     public List<Option> getOptions() {
         return options;
     }
+
+
 }

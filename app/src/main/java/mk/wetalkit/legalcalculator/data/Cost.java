@@ -1,21 +1,25 @@
 package mk.wetalkit.legalcalculator.data;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Created by nikolaminoski on 9/30/17.
  */
 
 public class Cost implements Serializable {
-    private String title;
-    private int cost;
+    private String name;
+    private float cost;
 
-    public int getCost() {
+    public float getCost() {
         return cost;
     }
 
+    public String getPrintableValue() {
+        return String.format(Locale.ENGLISH, "%,d МКД", (int) cost).replace(",", ".");
+    }
+
     public String getTitle() {
-        return title;
+        return name;
     }
 }

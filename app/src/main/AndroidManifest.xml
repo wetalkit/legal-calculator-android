@@ -34,6 +34,16 @@
             android:name="mk.wetalkit.legalcalculator.CalculatorActivity"
             android:label="@string/title_activity_calculator"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="mk.wetalkit.legalcalculator.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 
 </manifest>

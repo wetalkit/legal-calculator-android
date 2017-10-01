@@ -9,10 +9,12 @@
     tools:showIn="@layout/activity_calculator">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/layout_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -24,18 +26,10 @@
                 android:orientation="vertical"
                 android:padding="8dp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="#DDD" />
-
             <mk.wetalkit.legalcalculator.views.ExpandableLayout
                 android:id="@+id/layout_expandable"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipChildren="true">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:id="@+id/layout_inputs"
@@ -46,8 +40,10 @@
             </mk.wetalkit.legalcalculator.views.ExpandableLayout>
 
             <FrameLayout
+                android:id="@+id/view_expander"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-8dp">
 
                 <View
                     android:layout_width="match_parent"
@@ -60,10 +56,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="12dp"
-                    android:background="@drawable/circle_button_expand"
+                    android:background="@drawable/ic_action_down_circle"
                     android:elevation="8dp"
                     android:onClick="onExpandCollapseClick"
-                    app:srcCompat="@drawable/ic_action_down" />
+                    app:srcCompat="?attr/selectableItemBackgroundBorderless" />
 
             </FrameLayout>
 
@@ -71,6 +67,7 @@
                 android:id="@+id/layout_report"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
                 android:orientation="vertical" />
         </LinearLayout>
     </ScrollView>

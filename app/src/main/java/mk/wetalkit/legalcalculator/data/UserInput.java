@@ -18,7 +18,6 @@ public class UserInput implements Serializable {
     private String name;
     private String var;
     private int type;
-    @SerializedName("default")
     private FieldAttributes attributes;
     private String comment;
     @SerializedName("is_mandatory")
