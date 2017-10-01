@@ -2,26 +2,27 @@ package mk.wetalkit.legalcalculator;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import mk.wetalkit.legalcalculator.adapters.ServicesAdapter;
 import mk.wetalkit.legalcalculator.api.Api;
 import mk.wetalkit.legalcalculator.data.LegalService;
 import mk.wetalkit.legalcalculator.data.ServicesResponse;
 import mk.wetalkit.legalcalculator.fragments.WelcomeFragment;
-import mk.wetalkit.legalcalculator.utils.AnimatorUtils;
 import mk.wetalkit.legalcalculator.utils.DataHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ServicesResponse mServices;
     private Handler mHandler = new Handler();
     private long mStartTime;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("Main Screen");
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     private void loadDataFromApi() {

@@ -9,11 +9,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -29,13 +27,13 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 import mk.wetalkit.legalcalculator.api.Api;
 import mk.wetalkit.legalcalculator.data.Cost;
@@ -44,6 +42,7 @@ import mk.wetalkit.legalcalculator.data.Option;
 import mk.wetalkit.legalcalculator.data.ServiceCost;
 import mk.wetalkit.legalcalculator.data.TotalCost;
 import mk.wetalkit.legalcalculator.data.UserInput;
+import mk.wetalkit.legalcalculator.utils.CyrillicTranslator;
 import mk.wetalkit.legalcalculator.utils.ShareBitmapUtil;
 import mk.wetalkit.legalcalculator.views.ExpandableLayout;
 import retrofit2.Call;
@@ -65,6 +64,7 @@ public class CalculatorActivity extends AppCompatActivity {
     private ScrollView mScrollViewContent;
     private View mViewExpander;
     private FloatingActionButton mFabCalculate;
+    private Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +117,12 @@ public class CalculatorActivity extends AppCompatActivity {
                     }
                 });
                 mFabCalculate.hide();
+
+                mTracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("Action")
+                        .setAction("Calculate")
+                        .setLabel(CyrillicTranslator.transliterate(mLegalService.getTitle()))
+                        .build());
             }
         });
 
@@ -162,6 +168,12 @@ public class CalculatorActivity extends AppCompatActivity {
             mViewExpander.setVisibility(View.VISIBLE);
             mLayoutExpandable.setVisibility(View.VISIBLE);
         }
+
+        AnalyticsApplication application = (AnalyticsApplication) getApplication();
+        mTracker = application.getDefaultTracker();
+        mTracker.setScreenName("Calculator - " + CyrillicTranslator.transliterate(mLegalService.getTitle()));
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+
     }
 
     private void onResults(TotalCost results) {
@@ -232,7 +244,11 @@ public class CalculatorActivity extends AppCompatActivity {
         }
         bitmap.recycle();
 
-
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory("Action")
+                .setAction("Share")
+                .setLabel(CyrillicTranslator.transliterate(mLegalService.getTitle()))
+                .build());
 
 
     }
@@ -272,6 +288,8 @@ public class CalculatorActivity extends AppCompatActivity {
         public NumberInputFieldView(UserInput input) {
             super(input, R.layout.view_field_number);
             mEditTextValue = this.view.findViewById(R.id.editText_value);
+            mEditTextValue.setHint(input.getPlaceholder());
+            mEditTextValue.setText(input.getDefaultVal());
             mEditTextValue.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

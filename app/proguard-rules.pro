@@ -19,3 +19,23 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontnote retrofit2.Platform
+-dontnote retrofit2.Platform$IOS$MainThreadExecutor
+-dontwarn retrofit2.Platform$Java8
+-keepattributes Signature
+-keepattributes Exceptions
+
+-keepattributes Signature
+-keepattributes Annotation
+-keep class okhttp3.* { *; }
+-keep interface okhttp3.* { *; }
+-dontwarn okhttp3.**
+-dontwarn okio.**
+
+-dontwarn com.squareup.okhttp.**
+
+-keep class mk.wetalkit.legalcalculator.data.** { *; }
+-keep class android.support.v4.view.** { *; }
+
+-keepattributes Exceptions, Signature, LineNumberTable
