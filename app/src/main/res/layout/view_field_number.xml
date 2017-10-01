@@ -20,7 +20,7 @@
 
         <EditText
             android:id="@+id/editText_value"
-            android:layout_width="150dp"
+            android:layout_width="@dimen/field_number_value_witdth"
             android:layout_height="wrap_content"
             android:hint="3.000.000"
             android:imeOptions="actionNext"

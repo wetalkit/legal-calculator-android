@@ -3,6 +3,7 @@ package mk.wetalkit.legalcalculator.data;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,13 +14,15 @@ public class UserInput implements Serializable {
     public enum InputType {
         Number, Options
     }
+
     private String name;
     private String var;
-    private InputType type;
+    private int type;
     @SerializedName("default")
-    private String defaultVal;
+    private FieldAttributes attributes;
     private String comment;
-    private List<Option> options;
+    @SerializedName("is_mandatory")
+    private int mandatory;
 
     public String getName() {
         return name;
@@ -30,11 +33,15 @@ public class UserInput implements Serializable {
     }
 
     public InputType getType() {
-        return type;
+        return InputType.values()[type - 1];
     }
 
     public String getDefaultVal() {
-        return defaultVal;
+        return mandatory == 0 && attributes != null ? attributes.getPlaceholder() : "";
+    }
+
+    public String getPlaceholder() {
+        return mandatory == 1 && attributes != null ? attributes.getPlaceholder() : "";
     }
 
     public String getComment() {
@@ -42,6 +49,10 @@ public class UserInput implements Serializable {
     }
 
     public List<Option> getOptions() {
-        return options;
+        return attributes != null && attributes.getOptions() != null ? attributes.getOptions() : new ArrayList<Option>();
+    }
+
+    public boolean isMandatory() {
+        return mandatory == 1;
     }
 }

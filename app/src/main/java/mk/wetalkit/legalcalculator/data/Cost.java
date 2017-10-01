@@ -9,5 +9,13 @@ import java.util.HashMap;
 
 public class Cost implements Serializable {
     private String title;
-    private String formula;
+    private int cost;
+
+    public int getCost() {
+        return cost;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }

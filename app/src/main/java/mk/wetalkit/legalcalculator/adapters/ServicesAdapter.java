@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import mk.wetalkit.legalcalculator.R;
 import mk.wetalkit.legalcalculator.data.LegalService;
-import mk.wetalkit.taxcalculator.R;
 
 /**
  * Created by nikolaminoski on 9/30/17.

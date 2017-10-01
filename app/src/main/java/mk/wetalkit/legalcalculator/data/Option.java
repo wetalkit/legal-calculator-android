@@ -7,11 +7,11 @@ import java.io.Serializable;
  */
 
 public class Option implements Serializable {
-    private String title;
+    private String label;
     private String value;
 
     public String getTitle() {
-        return title;
+        return label;
     }
 
     public String getValue() {
@@ -20,6 +20,6 @@ public class Option implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s (%s)", title, value);
+        return String.format("%s (%s)", label, value);
     }
 }

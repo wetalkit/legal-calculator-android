@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="mk.wetalkit.taxcalculator.mk.wetalkit.legalcalculator.CalculatorActivity"
+    tools:context=".CalculatorActivity"
     tools:showIn="@layout/activity_calculator">
 
     <ScrollView
@@ -18,16 +18,54 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/layout_inputs"
+                android:id="@+id/layout_inputsMandatory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp" />
+                android:padding="8dp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#AAA" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="#DDD" />
+
+            <mk.wetalkit.legalcalculator.views.ExpandableLayout
+                android:id="@+id/layout_expandable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="true">
+
+                <LinearLayout
+                    android:id="@+id/layout_inputs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp" />
+            </mk.wetalkit.legalcalculator.views.ExpandableLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_gravity="center"
+                    android:background="#DDD" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/circle_button_expand"
+                    android:elevation="8dp"
+                    android:onClick="onExpandCollapseClick"
+                    app:srcCompat="@drawable/ic_action_down" />
+
+            </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/layout_report"
