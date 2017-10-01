@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mServices = DataHelper.load(MainActivity.this, ServicesResponse.class);
-                if (mServices == null) {
+                if (mServices == null || mServices.getAge() > 12 * 3600 * 1000) {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -72,6 +72,14 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ServicesResponse> call, Response<ServicesResponse> response) {
                 if (response.isSuccessful()) {
                     mServices = response.body();
+                    if (!BuildConfig.DEBUG) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                DataHelper.store(MainActivity.this, mServices);
+                            }
+                        }).start();
+                    }
                     loadVIewsDelayed();
                 } else {
                     //TODO: Load default
