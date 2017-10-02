@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Правен Калкулатор</string>
-    <string name="title_activity_calculator">Превен Калкулатор</string>
     <string name="splash_title">Калкулатор\nза\nправни трошоци</string>
     <string name="splash_continue_button"><![CDATA[<u>Продолжи</u>]]></string>
 </resources>
