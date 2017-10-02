@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -13,4 +13,29 @@
         android:text="Сподели"
         android:textColor="#FFF"
         android:tint="@color/colorPrimary" />
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_wetalkit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:background="?android:selectableItemBackground"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="WeTalkIT"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/textView_legahackers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:background="?android:selectableItemBackground"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Skopje Legal Hackers"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp" />
+</FrameLayout>

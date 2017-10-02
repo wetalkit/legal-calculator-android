@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import mk.wetalkit.legalcalculator.api.Api;
 import mk.wetalkit.legalcalculator.data.Cost;
@@ -200,6 +201,9 @@ public class CalculatorActivity extends AppCompatActivity {
 
         getLayoutInflater().inflate(R.layout.view_total_share, mLayoutReport, true);
 
+        findViewById(R.id.textView_wetalkit).setVisibility(View.INVISIBLE);
+        findViewById(R.id.textView_legahackers).setVisibility(View.INVISIBLE);
+
         mLayoutReport.post(new Runnable() {
             @Override
             public void run() {
@@ -218,6 +222,9 @@ public class CalculatorActivity extends AppCompatActivity {
 
     public void onShareClick(View view) {
         view.setVisibility(View.INVISIBLE);
+        findViewById(R.id.textView_wetalkit).setVisibility(View.VISIBLE);
+        findViewById(R.id.textView_legahackers).setVisibility(View.VISIBLE);
+
         View viewContent = findViewById(R.id.layout_content);
         float density = getResources().getDisplayMetrics().density;
         Bitmap bitmap = Bitmap.createBitmap((int) (viewContent.getWidth() / density), (int) (viewContent.getHeight() / density), Bitmap.Config.RGB_565);
@@ -226,6 +233,8 @@ public class CalculatorActivity extends AppCompatActivity {
         canvas.scale(1 / density, 1 / density);
         viewContent.draw(canvas);
         view.setVisibility(View.VISIBLE);
+        findViewById(R.id.textView_wetalkit).setVisibility(View.INVISIBLE);
+        findViewById(R.id.textView_legahackers).setVisibility(View.INVISIBLE);
 
         try {
             Uri uri = ShareBitmapUtil.getBitmapUri(this, bitmap, Bitmap.CompressFormat.PNG);
@@ -293,7 +302,11 @@ public class CalculatorActivity extends AppCompatActivity {
             mEditTextValue.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    try {
+                        long value = Long.parseLong(charSequence.toString().replace(".", "").replace(",", ""));
+                    } catch (Exception e) {
 
+                    }
                 }
 
                 @Override
@@ -303,6 +316,19 @@ public class CalculatorActivity extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable editable) {
+                    try {
+                        mEditTextValue.removeTextChangedListener(this);
+                        int selStart = mEditTextValue.getSelectionStart();
+                        int selEnd = mEditTextValue.getText().length() - mEditTextValue.getSelectionEnd();
+                        long value = Long.parseLong(editable.toString().replace(".", "").replace(",", ""));
+                        String newText = String.format(Locale.ENGLISH, "%,d", value).replace(",", ".");
+                        if (!newText.equals(mEditTextValue.getText().toString())) {
+                            mEditTextValue.setText(newText);
+                            mEditTextValue.setSelection(newText.length() - selEnd);
+                        }
+                    } catch (Exception e) {
+                    }
+                    mEditTextValue.addTextChangedListener(this);
 
                 }
             });
