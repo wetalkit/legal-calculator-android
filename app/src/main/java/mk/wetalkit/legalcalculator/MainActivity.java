@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mServices = DataHelper.load(MainActivity.this, ServicesResponse.class);
-                if (mServices == null || mServices.getAge() > 12 * 3600 * 1000) {
+                if (mServices == null || mServices.isDeprecated() || mServices.getAge() > 12 * 3600 * 1000) {
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
