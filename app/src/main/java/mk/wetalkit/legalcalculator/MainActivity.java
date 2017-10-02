@@ -54,16 +54,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 mServices = DataHelper.load(MainActivity.this, ServicesResponse.class);
-                if (mServices == null || mServices.isDeprecated() || mServices.getAge() > 12 * 3600 * 1000) {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            loadDataFromApi();
-                        }
-                    });
-                } else {
-                    loadVIewsDelayed();
-                }
+                if (mServices != null && mServices.isDeprecated())
+                    mServices = null;
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadDataFromApi();
+                    }
+                });
             }
         }).start();
 
@@ -89,25 +87,32 @@ public class MainActivity extends AppCompatActivity {
                     }
                     loadVIewsDelayed();
                 } else {
-                    //TODO: Load default
-                    new AlertDialog.Builder(MainActivity.this).setTitle("Грешка").setMessage("Неможе да се вчитаат правните услуги, проверете ја вашата интернет конекција и обидете се повторно.").setPositiveButton("Во Ред", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
-                        }
-                    }).show();
+                    if (mServices == null) {
+                        new AlertDialog.Builder(MainActivity.this).setTitle("Грешка").setMessage("Неможе да се вчитаат правните услуги, проверете ја вашата интернет конекција и обидете се повторно.").setPositiveButton("Во Ред", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                            }
+                        }).show();
+                    } else {
+                        loadVIewsDelayed();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<ServicesResponse> call, Throwable t) {
                 t.printStackTrace();
-                new AlertDialog.Builder(MainActivity.this).setTitle("Грешка").setMessage("Неможе да се вчитаат правните услуги, проверете ја вашата интернет конекција и обидете се повторно.").setPositiveButton("Во Ред", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                }).show();
+                if (mServices == null) {
+                    new AlertDialog.Builder(MainActivity.this).setTitle("Грешка").setMessage("Неможе да се вчитаат правните услуги, проверете ја вашата интернет конекција и обидете се повторно.").setPositiveButton("Во Ред", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    }).show();
+                } else {
+                    loadVIewsDelayed();
+                }
             }
         });
     }
