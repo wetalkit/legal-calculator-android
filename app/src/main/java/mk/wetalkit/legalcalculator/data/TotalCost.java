@@ -12,9 +12,9 @@ import java.util.Locale;
 public class TotalCost implements Serializable {
     @SerializedName("costs")
     private ServiceCost serviceCost[];
-    @SerializedName("total-min")
+    @SerializedName("total_min")
     private float totalMin;
-    @SerializedName("total-max")
+    @SerializedName("total_max")
     private float totalMax;
     private float total;
 
@@ -35,10 +35,10 @@ public class TotalCost implements Serializable {
     }
 
     public String getPrintableTotal() {
-        if (total > 0) {
-            return String.format(Locale.ENGLISH, "%,d МКД", (int) total).replace(",", ".");
-        } else {
+        if (totalMax > 0) {
             return String.format(Locale.ENGLISH, "%,d - %,d МКД", (int) totalMin, (int) totalMax).replace(",", ".");
+        } else {
+            return String.format(Locale.ENGLISH, "%,d МКД", (int) total).replace(",", ".");
         }
     }
 }

@@ -1,7 +1,5 @@
 package mk.wetalkit.legalcalculator.fragments;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,27 +23,27 @@ public class WelcomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.view_splashscreen, container, false);
-        view.findViewById(R.id.textView_wetalkit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/WeTalkItMK/")));
-                onInterrupt();
-            }
-        });
-        view.findViewById(R.id.textView_legahackers).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/skopjelegalhackers")));
-                onInterrupt();
-            }
-        });
-        (mViewContinue = view.findViewById(R.id.textView_continue)).setVisibility(View.INVISIBLE);
-        mViewContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                close();
-            }
-        });
+//        view.findViewById(R.id.textView_wetalkit).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/WeTalkItMK/")));
+//                onInterrupt();
+//            }
+//        });
+//        view.findViewById(R.id.textView_legahackers).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/skopjelegalhackers")));
+//                onInterrupt();
+//            }
+//        });
+//        (mViewContinue = view.findViewById(R.id.textView_continue)).setVisibility(View.INVISIBLE);
+//        mViewContinue.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                close();
+//            }
+//        });
         return view;
     }
 
@@ -70,7 +68,7 @@ public class WelcomeFragment extends Fragment {
     }
 
     public void done() {
-        if(mViewContinue.getVisibility() != View.VISIBLE) {
+        if(mViewContinue == null || mViewContinue.getVisibility() != View.VISIBLE) {
             close();
         }
 

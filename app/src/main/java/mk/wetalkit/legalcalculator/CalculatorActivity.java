@@ -336,7 +336,7 @@ public class CalculatorActivity extends AppCompatActivity {
 
         @Override
         public String getValue() {
-            return mEditTextValue.getText().toString();
+            return mEditTextValue.getText().toString().replace(".", "");
         }
 
         @Override
