@@ -5,11 +5,13 @@
     android:orientation="vertical">
 
     <mk.wetalkit.legalcalculator.views.ColorButton
+        android:id="@+id/button_share"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
-        android:onClick="onShareClick"
+        android:clickable="true"
+        android:focusable="true"
         android:text="Сподели"
         android:textColor="#FFF"
         android:tint="@color/colorPrimary" />

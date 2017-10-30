@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="wrap_content" android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
@@ -21,7 +21,7 @@
         <Spinner
             android:id="@+id/spinner_value"
             android:layout_width="@dimen/field_options_value_witdth"
-            android:layout_height="wrap_content" />
+            android:layout_height="35dp" />
     </LinearLayout>
 
     <TextView

@@ -35,7 +35,7 @@ public class TotalCost implements Serializable {
     }
 
     public String getPrintableTotal() {
-        if (totalMax > 0) {
+        if (totalMax > 0 && totalMax != totalMin) {
             return String.format(Locale.ENGLISH, "%,d - %,d МКД", (int) totalMin, (int) totalMax).replace(",", ".");
         } else {
             return String.format(Locale.ENGLISH, "%,d МКД", (int) total).replace(",", ".");

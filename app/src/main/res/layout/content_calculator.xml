@@ -52,13 +52,15 @@
                     android:background="#DDD" />
 
                 <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/button_expandOptions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_margin="12dp"
                     android:background="@drawable/ic_action_down_circle"
+                    android:clickable="true"
                     android:elevation="8dp"
-                    android:onClick="onExpandCollapseClick"
+                    android:focusable="true"
                     app:srcCompat="?attr/selectableItemBackgroundBorderless" />
 
             </FrameLayout>

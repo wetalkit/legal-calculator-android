@@ -28,6 +28,6 @@ public class Option implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%s (%s)", label, value);
+        return label;
     }
 }

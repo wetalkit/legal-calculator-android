@@ -6,11 +6,9 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 /**
  * Created by nikolaminoski on 9/30/17.
@@ -50,6 +48,14 @@ public class ExpandableLayout extends FrameLayout {
         if (mOriginalHeight > 0) {
             getLayoutParams().height = mIsExpanded ? mOriginalHeight : 0;
         }
+    }
+
+    public void minimize(int width) {
+
+    }
+
+    public void maximize() {
+
     }
 
     public boolean toggle() {

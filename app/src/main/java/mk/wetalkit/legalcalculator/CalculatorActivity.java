@@ -127,6 +127,17 @@ public class CalculatorActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.button_expandOptions).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mLayoutExpandable.toggle()) {
+                    view.animate().rotation(-180).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(400);
+                } else {
+                    view.animate().rotation(0).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(400);
+                }
+            }
+        });
+
         mLayoutMandatoryInputs = findViewById(R.id.layout_inputsMandatory);
         mLayoutInputs = findViewById(R.id.layout_inputs);
         mLayoutReport = findViewById(R.id.layout_report);
@@ -204,20 +215,19 @@ public class CalculatorActivity extends AppCompatActivity {
         findViewById(R.id.textView_wetalkit).setVisibility(View.INVISIBLE);
         findViewById(R.id.textView_legahackers).setVisibility(View.INVISIBLE);
 
+        findViewById(R.id.button_share).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onShareClick(v);
+            }
+        });
+
         mLayoutReport.post(new Runnable() {
             @Override
             public void run() {
                 mScrollViewContent.fullScroll(View.FOCUS_DOWN);
             }
         });
-    }
-
-    public void onExpandCollapseClick(View view) {
-        if (mLayoutExpandable.toggle()) {
-            view.animate().rotation(-180).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(400);
-        } else {
-            view.animate().rotation(0).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(400);
-        }
     }
 
     public void onShareClick(View view) {
